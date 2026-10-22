@@ -1,6 +1,39 @@
 {
   "updated": "2026-10-22",
-  "cpgs": [],
+  "cpgs": [
+    {
+      "id": "peg",
+      "title": "Percutaneous Gastrostomy Tube Placement",
+      "category": "Enteral access",
+      "service": "EGS",
+      "version": "3.0",
+      "status": "Active",
+      "approved": null,
+      "review_due": null,
+      "owner": "MUSC ACS Emergency General Surgery",
+      "summary": "Adult PEG: indications and contraindications, antibiotic prophylaxis and anticoagulant handling, the three safety tests, securement at placement, and feeding within 4 hours.",
+      "file": "PEG_CPG_MUSC_EGS_v3_0.pdf",
+      "url": null,
+      "supersedes": null,
+      "standards": []
+    },
+    {
+      "id": "muscle-biopsy",
+      "title": "Muscle Biopsy - How To Guide",
+      "category": "Procedures and technical guides",
+      "service": "EGS",
+      "version": "1.0",
+      "status": "Active",
+      "approved": "2026-04-01",
+      "review_due": "2028-04-01",
+      "owner": "MUSC ACS Emergency General Surgery",
+      "summary": "Open muscle biopsy: lab coordination and receiving hours, muscle selection, clamp-before-excision technique, and handling of the formalin, fresh and glutaraldehyde specimens.",
+      "file": "MUSC_Muscle_Biopsy_reference_v1_0.pdf",
+      "url": null,
+      "supersedes": null,
+      "standards": []
+    }
+  ],
   "categories": [
     "Acute abdomen and peritonitis",
     "Soft tissue infection",
@@ -12,7 +45,28 @@
     "Acute gastrointestinal bleed",
     "Perforated peptic ulcer disease",
     "Incarcerated hernia",
+    "Enteral access",
+    "Procedures and technical guides",
     "Older adults",
     "Perioperative and cross-cutting"
-  ]
+  ],
+  "other_cpgs": [
+    {
+      "title": "ASGE guideline on gastrostomy feeding tubes: methodology and review of evidence",
+      "organization": "American Society for Gastrointestinal Endoscopy",
+      "year": "2025",
+      "category": "Enteral access",
+      "url": "https://doi.org/10.1016/j.vgie.2024.09.014",
+      "note": "Primary external source for the MUSC PEG CPG v3.0."
+    },
+    {
+      "title": "AGA clinical practice update on endoscopic enteral access: commentary",
+      "organization": "American Gastroenterological Association",
+      "year": "2025",
+      "category": "Enteral access",
+      "url": "https://doi.org/10.1053/j.gastro.2024.09.043",
+      "note": "Cited in the MUSC PEG CPG v3.0 for anticoagulant handling and medication administration."
+    }
+  ],
+  "references": []
 }
