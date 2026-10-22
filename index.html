@@ -93,6 +93,14 @@
   details.older summary { font-size: 12.5px; color: var(--muted); cursor: pointer; }
   details.older ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--ink-2); }
   details.older a { color: inherit; }
+  .ext { display: grid; gap: 4px; padding: 12px 0; border-bottom: 1px solid var(--rule-soft); }
+  .ext:last-child { border-bottom: 0; }
+  .ext .t { font-family: var(--serif); font-size: 15.5px; line-height: 1.4; margin: 0; }
+  .ext .t a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .ext .t a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .ext .sub { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  .ext .note { font-size: 13.5px; color: var(--ink-2); margin: 0; max-width: 66ch; }
+  .subhead { font-family: var(--sans); font-size: 13px; font-weight: 600; margin: 18px 0 2px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
   .empty { padding: 28px 0; color: var(--muted); font-size: 14px; }
 
   .index { margin-top: 52px; padding-top: 26px; border-top: 1px solid var(--rule); }
@@ -121,7 +129,7 @@
   </header>
 
   <div class="controls">
-    <input id="q" type="search" placeholder="Search title, condition, owner or standard" autocomplete="off">
+    <input id="q" type="search" placeholder="Search everything on this page" autocomplete="off">
     <div class="seg" id="statusSeg" role="group" aria-label="Which guidelines to show">
       <button type="button" data-status="active" aria-pressed="true">Current</button>
       <button type="button" data-status="all" aria-pressed="false">Include retired</button>
@@ -134,6 +142,18 @@
   </div>
 
   <main id="board"></main>
+
+  <section class="index" id="otherSec">
+    <h2>Other guidelines</h2>
+    <p>Society and national guidelines the MUSC CPGs draw on, or that cover EGS conditions without a local guideline yet. Links go to the publisher.</p>
+    <div id="other"></div>
+  </section>
+
+  <section class="index" id="refSec">
+    <h2>EGS references</h2>
+    <p>Key papers and evidence summaries for the EGS service. Citations and links only; full text through the MUSC library.</p>
+    <div id="refs"></div>
+  </section>
 
   <section class="index">
     <h2>Core condition coverage</h2>
@@ -149,18 +169,86 @@
 
 <script>
   /* Shared link(s) to library.json in Dropbox. Tried in order; empty = use the snapshot. */
-  const DATA_URLS = [];
+  const DATA_URLS = [
+    "https://www.dropbox.com/scl/fi/1a4vgsjwyb1pvbemou53r/library.json?rlkey=gw4moa9j0q69yggoo8n55f02c&raw=1",
+    "https://dl.dropboxusercontent.com/scl/fi/1a4vgsjwyb1pvbemou53r/library.json?rlkey=gw4moa9j0q69yggoo8n55f02c"
+  ];
+
+  /* Shared link to the cpgs subfolder. Each CPG opens as folder link + &preview=filename. Empty = links pending. */
+  const CPG_FOLDER_URL = "https://www.dropbox.com/scl/fo/ps30w5tkoutyngcyfj1r8/AFvVA82vtdkVKd3gOo28Qqc?rlkey=xl6jdkiqdkpiiungw3bizwoz1&dl=0";
 
   /* SNAPSHOT-START - fallback copy of library.json as of the last upload of this page. */
   const SNAPSHOT = {
     "updated": "2026-10-22",
-    "cpgs": [],
+    "cpgs": [
+      {
+        "id": "peg",
+        "title": "Percutaneous Gastrostomy Tube Placement",
+        "category": "Enteral access",
+        "service": "EGS",
+        "version": "3.0",
+        "status": "Active",
+        "approved": null,
+        "review_due": null,
+        "owner": "MUSC ACS Emergency General Surgery",
+        "summary": "Adult PEG: indications and contraindications, antibiotic prophylaxis and anticoagulant handling, the three safety tests, securement at placement, and feeding within 4 hours.",
+        "file": "PEG_CPG_MUSC_EGS_v3_0.pdf",
+        "url": null,
+        "supersedes": null,
+        "standards": []
+      },
+      {
+        "id": "muscle-biopsy",
+        "title": "Muscle Biopsy - How To Guide",
+        "category": "Procedures and technical guides",
+        "service": "EGS",
+        "version": "1.0",
+        "status": "Active",
+        "approved": "2026-04-01",
+        "review_due": "2028-04-01",
+        "owner": "MUSC ACS Emergency General Surgery",
+        "summary": "Open muscle biopsy: lab coordination and receiving hours, muscle selection, clamp-before-excision technique, and handling of the formalin, fresh and glutaraldehyde specimens.",
+        "file": "MUSC_Muscle_Biopsy_reference_v1_0.pdf",
+        "url": null,
+        "supersedes": null,
+        "standards": []
+      }
+    ],
     "categories": [
-      "Acute abdomen and peritonitis", "Soft tissue infection", "Gallbladder disease",
-      "Gastrointestinal obstruction", "Pancreatitis", "Diverticular disease", "Appendicitis",
-      "Acute gastrointestinal bleed", "Perforated peptic ulcer disease", "Incarcerated hernia",
-      "Older adults", "Perioperative and cross-cutting"
-    ]
+      "Acute abdomen and peritonitis",
+      "Soft tissue infection",
+      "Gallbladder disease",
+      "Gastrointestinal obstruction",
+      "Pancreatitis",
+      "Diverticular disease",
+      "Appendicitis",
+      "Acute gastrointestinal bleed",
+      "Perforated peptic ulcer disease",
+      "Incarcerated hernia",
+      "Enteral access",
+      "Procedures and technical guides",
+      "Older adults",
+      "Perioperative and cross-cutting"
+    ],
+    "other_cpgs": [
+      {
+        "title": "ASGE guideline on gastrostomy feeding tubes: methodology and review of evidence",
+        "organization": "American Society for Gastrointestinal Endoscopy",
+        "year": "2025",
+        "category": "Enteral access",
+        "url": "https://doi.org/10.1016/j.vgie.2024.09.014",
+        "note": "Primary external source for the MUSC PEG CPG v3.0."
+      },
+      {
+        "title": "AGA clinical practice update on endoscopic enteral access: commentary",
+        "organization": "American Gastroenterological Association",
+        "year": "2025",
+        "category": "Enteral access",
+        "url": "https://doi.org/10.1053/j.gastro.2024.09.043",
+        "note": "Cited in the MUSC PEG CPG v3.0 for anticoagulant handling and medication administration."
+      }
+    ],
+    "references": []
   };
   /* SNAPSHOT-END */
 
@@ -198,7 +286,13 @@
     return hay.includes(text);
   }
 
+  function fileUrl(c) {
+    if (c.url) return c.url;
+    if (CPG_FOLDER_URL && c.file) return CPG_FOLDER_URL + (CPG_FOLDER_URL.includes("?") ? "&" : "?") + "preview=" + encodeURIComponent(c.file);
+    return null;
+  }
   function link(c, label) {
+    c = Object.assign({}, c, { url: fileUrl(c) });
     return c.url ? '<a href="' + esc(c.url) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + '</a>'
                  : esc(label) + '<span class="pending">Link pending</span>';
   }
@@ -254,7 +348,34 @@
         : "No guidelines have been posted yet. Approved guidelines will appear here as they are added.") + '</p>';
     }
     document.getElementById("board").innerHTML = html;
+    renderExt(LIB.other_cpgs, "other", (LIB.other_cpgs || []).length ? "No guideline matches that search." : "None posted yet.");
+    renderExt(LIB.references, "refs", (LIB.references || []).length ? "No reference matches that search." : "None posted yet.");
     document.getElementById("count").textContent = shown.length + " of " + all.length + (all.length === 1 ? " guideline" : " guidelines");
+  }
+
+  function extMatches(e) {
+    if (!text) return true;
+    return [e.title, e.citation, e.organization, e.category, e.note, e.year].join(" ").toLowerCase().includes(text);
+  }
+  function extHTML(e) {
+    const label = e.title || e.citation || "";
+    const sub = [e.organization, e.year].filter(Boolean).join(", ");
+    return '<article class="ext"><p class="t">' + (e.url
+        ? '<a href="' + esc(e.url) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + '</a>' : esc(label)) + '</p>' +
+      (sub ? '<div class="sub">' + esc(sub) + '</div>' : "") +
+      (e.note ? '<p class="note">' + esc(e.note) + '</p>' : "") + '</article>';
+  }
+  function renderExt(list, elId, emptyMsg) {
+    const shown = (list || []).filter(extMatches);
+    const order = LIB.categories || [];
+    const cats = [...new Set(shown.map(e => e.category || "General"))].sort((a, b) => {
+      const ia = order.indexOf(a), ib = order.indexOf(b);
+      return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib) || a.localeCompare(b);
+    });
+    let html = "";
+    for (const k of cats) html += '<div class="subhead">' + esc(k) + '</div>' +
+      shown.filter(e => (e.category || "General") === k).map(extHTML).join("");
+    document.getElementById(elId).innerHTML = html || '<p class="empty">' + emptyMsg + '</p>';
   }
 
   function renderCats() {
