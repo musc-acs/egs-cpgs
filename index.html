@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>EGS Clinical Practice Guidelines - MUSC Acute Care Surgery</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:wght@400;600&display=swap">
+<style>
+  :root {
+    --ground: #F6F7FA;
+    --surface: #FFFFFF;
+    --ink: #11161E;
+    --ink-2: #3D4756;
+    --muted: #6B7686;
+    --rule: #DEE3EB;
+    --rule-soft: #EAEEF3;
+    --accent: #1B4E8F;
+    --accent-soft: #E8EFF9;
+    --egs: #7A5600;
+    --egs-bg: #F8F0DD;
+    --old: #6B7686;
+    --old-bg: #EDF0F4;
+    --shadow: 0 1px 2px rgba(17, 22, 30, .05);
+    --sans: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --serif: "IBM Plex Serif", Georgia, "Times New Roman", serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #0D1118; --surface: #141A23; --ink: #E7EBF1; --ink-2: #B7C0CD; --muted: #858F9F;
+      --rule: #232B37; --rule-soft: #1C232D; --accent: #79A9EC; --accent-soft: #16233A;
+      --egs: #D9AE4E; --egs-bg: #261F10; --old: #9AA5B4; --old-bg: #1D242E;
+      --shadow: 0 1px 2px rgba(0, 0, 0, .4); color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #0D1118; --surface: #141A23; --ink: #E7EBF1; --ink-2: #B7C0CD; --muted: #858F9F;
+    --rule: #232B37; --rule-soft: #1C232D; --accent: #79A9EC; --accent-soft: #16233A;
+    --egs: #D9AE4E; --egs-bg: #261F10; --old: #9AA5B4; --old-bg: #1D242E;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .4); color-scheme: dark;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 20px 72px; }
+
+  .masthead { display: flex; flex-direction: column; gap: 14px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .09em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(28px, 5.5vw, 40px); line-height: 1.12; letter-spacing: -.015em; margin: 0; text-wrap: balance; }
+  .standfirst { margin: 0; max-width: 62ch; color: var(--ink-2); font-size: 16px; }
+  .stamp { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+
+  .controls { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; padding-bottom: 14px; border-bottom: 1px solid var(--rule); }
+  #q { flex: 1 1 220px; min-width: 0; font-family: var(--sans); font-size: 14px; color: var(--ink); background: var(--surface); border: 1px solid var(--rule); border-radius: 3px; padding: 8px 11px; }
+  #q::placeholder { color: var(--muted); }
+  #q:focus, button:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .seg { display: flex; border: 1px solid var(--rule); border-radius: 3px; overflow: hidden; }
+  .seg button { font-family: var(--sans); font-size: 12.5px; font-weight: 500; color: var(--ink-2); background: var(--surface); border: 0; border-right: 1px solid var(--rule); padding: 8px 12px; cursor: pointer; white-space: nowrap; }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+  .count { font-family: var(--mono); font-size: 11.5px; color: var(--muted); margin-left: auto; white-space: nowrap; }
+
+  .group { margin-top: 34px; }
+  .group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; padding-bottom: 9px; border-bottom: 2px solid var(--ink); }
+  .group-title { font-family: var(--serif); font-size: 19px; font-weight: 600; letter-spacing: -.005em; }
+  .group-meta { font-size: 12px; color: var(--muted); margin-left: auto; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  .entry { display: grid; gap: 6px; padding: 16px 0; border-bottom: 1px solid var(--rule-soft); }
+  .group .entry:last-child { border-bottom: 0; padding-bottom: 4px; }
+  .entry-top { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .tag { font-family: var(--mono); font-size: 10.5px; font-weight: 500; letter-spacing: .06em; padding: 3px 7px; border-radius: 2px; color: var(--egs); background: var(--egs-bg); }
+  .tag.old { color: var(--old); background: var(--old-bg); }
+  .meta { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  .title { font-family: var(--serif); font-size: 17px; line-height: 1.4; margin: 0; font-weight: 600; }
+  .title a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule); }
+  .title a:hover { color: var(--accent); border-bottom-color: var(--accent); }
+  .pending { font-family: var(--sans); font-size: 12px; font-weight: 500; color: var(--muted); border: 1px dashed var(--rule); border-radius: 2px; padding: 1px 6px; margin-left: 6px; vertical-align: 2px; }
+  .summary { margin: 0; font-size: 14px; color: var(--ink-2); max-width: 66ch; }
+  .byline { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+  details.older { margin-top: 4px; }
+  details.older summary { font-size: 12.5px; color: var(--muted); cursor: pointer; }
+  details.older ul { margin: 6px 0 0; padding-left: 18px; font-size: 13px; color: var(--ink-2); }
+  details.older a { color: inherit; }
+  .empty { padding: 28px 0; color: var(--muted); font-size: 14px; }
+
+  .index { margin-top: 52px; padding-top: 26px; border-top: 1px solid var(--rule); }
+  .index h2 { font-family: var(--serif); font-size: 20px; font-weight: 600; margin: 0 0 4px; }
+  .index p { margin: 0 0 16px; font-size: 13.5px; color: var(--muted); max-width: 58ch; }
+  .cats { display: flex; flex-wrap: wrap; gap: 6px; }
+  .cat { font-family: var(--sans); font-size: 12.5px; color: var(--ink-2); background: var(--surface); border: 1px solid var(--rule); border-radius: 2px; padding: 4px 8px; cursor: pointer; display: inline-flex; gap: 6px; align-items: baseline; }
+  .cat:hover { border-color: var(--accent); color: var(--accent); }
+  .cat .n { font-family: var(--mono); font-size: 10.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+  .cat[data-has="1"] { border-color: var(--accent); }
+  .cat[data-has="1"] .n { color: var(--accent); }
+
+  footer { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--rule-soft); font-size: 12.5px; color: var(--muted); display: flex; flex-direction: column; gap: 5px; }
+
+  @media (max-width: 560px) { .count { margin-left: 0; flex-basis: 100%; } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="eyebrow">MUSC Division of Acute Care Surgery</div>
+    <h1>EGS Clinical Practice Guidelines</h1>
+    <p class="standfirst">The current emergency general surgery guidelines for the MUSC service, each as an approved PDF. Earlier versions stay listed under the one that replaced them.</p>
+    <div class="stamp" id="stamp"></div>
+  </header>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search title, condition, owner or standard" autocomplete="off">
+    <div class="seg" id="statusSeg" role="group" aria-label="Which guidelines to show">
+      <button type="button" data-status="active" aria-pressed="true">Current</button>
+      <button type="button" data-status="all" aria-pressed="false">Include retired</button>
+    </div>
+    <div class="seg" id="groupSeg" role="group" aria-label="Group guidelines">
+      <button type="button" data-group="category" aria-pressed="true">By condition</button>
+      <button type="button" data-group="date" aria-pressed="false">By date approved</button>
+    </div>
+    <span class="count" id="count"></span>
+  </div>
+
+  <main id="board"></main>
+
+  <section class="index">
+    <h2>Core condition coverage</h2>
+    <p>The ten conditions an ACS-verified EGS program must manage definitively (standard PSG.1), plus older adults and cross-cutting pathways. Outlined conditions have a current guideline. Select one to filter.</p>
+    <div class="cats" id="cats"></div>
+  </section>
+
+  <footer>
+    <div>Guidelines support, and do not replace, clinical judgment and MUSC policy.</div>
+    <div>No patient identifiers on this page. Questions or updates: holena@musc.edu</div>
+  </footer>
+</div>
+
+<script>
+  /* Shared link(s) to library.json in Dropbox. Tried in order; empty = use the snapshot. */
+  const DATA_URLS = [];
+
+  /* SNAPSHOT-START - fallback copy of library.json as of the last upload of this page. */
+  const SNAPSHOT = {
+    "updated": "2026-10-22",
+    "cpgs": [],
+    "categories": [
+      "Acute abdomen and peritonitis", "Soft tissue infection", "Gallbladder disease",
+      "Gastrointestinal obstruction", "Pancreatitis", "Diverticular disease", "Appendicitis",
+      "Acute gastrointestinal bleed", "Perforated peptic ulcer disease", "Incarcerated hernia",
+      "Older adults", "Perioperative and cross-cutting"
+    ]
+  };
+  /* SNAPSHOT-END */
+
+  let LIB = SNAPSHOT, fromSnapshot = true;
+  let text = "", statusMode = "active", groupMode = "category";
+
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const fmt = iso => {
+    if (!iso) return "";
+    const [y, m, d] = iso.split("-").map(Number);
+    return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+  };
+
+  async function load() {
+    for (const u of DATA_URLS) {
+      try {
+        const r = await fetch(u, { cache: "no-store" });
+        if (!r.ok) continue;
+        const j = await r.json();
+        if (j && Array.isArray(j.cpgs) && Array.isArray(j.categories)) { LIB = j; fromSnapshot = false; return; }
+      } catch (e) { /* try the next form */ }
+    }
+  }
+
+  function current() {
+    const cps = LIB.cpgs || [];
+    const shown = cps.filter(c => c.status === "Active" || (statusMode === "all" && c.status === "Retired"));
+    return shown.map(c => ({ main: c, older: cps.filter(o => o.id === c.id && o.status === "Superseded")
+      .sort((a, b) => (b.approved || "").localeCompare(a.approved || "")) }));
+  }
+
+  function matches(c) {
+    if (!text) return true;
+    const hay = [c.title, c.category, c.owner, c.summary, (c.standards || []).join(" "), c.version].join(" ").toLowerCase();
+    return hay.includes(text);
+  }
+
+  function link(c, label) {
+    return c.url ? '<a href="' + esc(c.url) + '" target="_blank" rel="noopener noreferrer">' + esc(label) + '</a>'
+                 : esc(label) + '<span class="pending">Link pending</span>';
+  }
+
+  function entryHTML(x) {
+    const c = x.main;
+    const bits = [];
+    if (c.version) bits.push("Version " + c.version);
+    if (c.approved) bits.push("Approved " + fmt(c.approved));
+    if (c.review_due) bits.push("Review due " + fmt(c.review_due));
+    const older = x.older.length
+      ? '<details class="older"><summary>' + x.older.length + (x.older.length === 1 ? " earlier version" : " earlier versions") + '</summary><ul>' +
+        x.older.map(o => '<li>' + link(o, "Version " + (o.version || "?") + (o.approved ? ", approved " + fmt(o.approved) : "")) + '</li>').join("") +
+        '</ul></details>' : "";
+    return '<article class="entry">' +
+      '<div class="entry-top">' +
+        '<span class="tag' + (c.status === "Retired" ? " old" : "") + '">' + esc(c.status === "Retired" ? "Retired" : "Current") + '</span>' +
+        (c.standards && c.standards.length ? '<span class="meta">Supports ' + esc(c.standards.join(", ")) + '</span>' : "") +
+      '</div>' +
+      '<p class="title">' + link(c, c.title) + '</p>' +
+      (c.summary ? '<p class="summary">' + esc(c.summary) + '</p>' : "") +
+      '<div class="byline">' + esc(bits.join(", ")) + (c.owner ? (bits.length ? ". " : "") + esc(c.owner) : "") + '</div>' +
+      older +
+    '</article>';
+  }
+
+  function block(title, items) {
+    return '<section class="group"><div class="group-head"><span class="group-title">' + esc(title) + '</span>' +
+      '<span class="group-meta">' + items.length + (items.length === 1 ? " guideline" : " guidelines") + '</span></div>' +
+      items.map(entryHTML).join("") + '</section>';
+  }
+
+  function render() {
+    const all = current();
+    const shown = all.filter(x => matches(x.main));
+    let html = "";
+    if (groupMode === "category") {
+      const order = LIB.categories || [];
+      const cats = [...new Set(shown.map(x => x.main.category || "Uncategorized"))]
+        .sort((a, b) => {
+          const ia = order.indexOf(a), ib = order.indexOf(b);
+          return (ia < 0 ? 999 : ia) - (ib < 0 ? 999 : ib) || a.localeCompare(b);
+        });
+      for (const k of cats) html += block(k, shown.filter(x => (x.main.category || "Uncategorized") === k)
+        .sort((a, b) => a.main.title.localeCompare(b.main.title)));
+    } else {
+      const sorted = shown.slice().sort((a, b) => (b.main.approved || "").localeCompare(a.main.approved || ""));
+      if (sorted.length) html = block("Most recently approved first", sorted);
+    }
+    if (!shown.length) {
+      html = '<p class="empty">' + ((LIB.cpgs || []).length
+        ? "No guideline matches that search. Clear the search box to see all of them."
+        : "No guidelines have been posted yet. Approved guidelines will appear here as they are added.") + '</p>';
+    }
+    document.getElementById("board").innerHTML = html;
+    document.getElementById("count").textContent = shown.length + " of " + all.length + (all.length === 1 ? " guideline" : " guidelines");
+  }
+
+  function renderCats() {
+    const counts = {};
+    for (const c of LIB.cpgs || []) if (c.status === "Active") counts[c.category] = (counts[c.category] || 0) + 1;
+    document.getElementById("cats").innerHTML = (LIB.categories || []).map(k =>
+      '<button class="cat" type="button" data-cat="' + esc(k) + '" data-has="' + (counts[k] ? 1 : 0) + '">' +
+      esc(k) + '<span class="n">' + (counts[k] || 0) + '</span></button>').join("");
+  }
+
+  function renderStamp() {
+    document.getElementById("stamp").textContent = LIB.updated
+      ? "Updated " + fmt(LIB.updated) + (fromSnapshot && DATA_URLS.length ? " (saved copy - live list unavailable)" : "") : "";
+  }
+
+  document.getElementById("q").addEventListener("input", e => { text = e.target.value.trim().toLowerCase(); render(); });
+  for (const [id, key, set] of [["statusSeg", "status", v => statusMode = v], ["groupSeg", "group", v => groupMode = v]]) {
+    document.querySelectorAll("#" + id + " button").forEach(b => b.addEventListener("click", () => {
+      set(b.dataset[key]);
+      document.querySelectorAll("#" + id + " button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      render();
+    }));
+  }
+  document.addEventListener("click", e => {
+    const t = e.target.closest("[data-cat]");
+    if (!t) return;
+    const q = document.getElementById("q");
+    q.value = t.dataset.cat; text = t.dataset.cat.toLowerCase(); render();
+    q.scrollIntoView({ block: "center", behavior: "smooth" });
+  });
+
+  renderCats(); renderStamp(); render();
+  load().then(() => { renderCats(); renderStamp(); render(); });
+</script>
+</body>
+</html>
